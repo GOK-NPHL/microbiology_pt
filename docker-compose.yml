@@ -1,0 +1,49 @@
+version: "3.7"
+services:
+  
+  microbiologypt_db:
+    container_name: microbiologypt_db
+    restart: unless-stopped
+    ports:
+     - "3339:3306"
+    build:
+      context: ./
+      dockerfile: docker-compose/mysql/Dockerfile
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: microbiologypt_mysql
+    volumes:
+      - microbiologypt_mysql:/var/lib/mysql
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+
+  microbiologypt_app:
+    build:
+      args:
+        user: duncan
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: microbiologypt_app
+    container_name: microbiologypt_app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+   
+  microbiologypt_nginx:
+    container_name: microbiologypt_nginx
+    restart: unless-stopped
+    ports:
+      - 8097:80
+    build:
+        context: ./
+        dockerfile: docker-compose/nginx/Dockerfile
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx/:/etc/nginx/conf.d/
+
+volumes:
+  microbiologypt_mysql:
