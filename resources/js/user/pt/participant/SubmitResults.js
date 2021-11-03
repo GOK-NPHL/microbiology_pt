@@ -15,7 +15,7 @@ class SubmitResults extends React.Component {
             testJustification: 'Periodic testing as per the protocol',
             kitReceivedDate: '',
             kitLotNo: '',
-            nameOfTest: 'HPV',
+            nameOfTest: 'Microbiology',
             ptLotNumber: '',
             testingDate: '',
             labId: '',
@@ -512,13 +512,13 @@ class SubmitResults extends React.Component {
 
                                 <input readOnly value={this.state.nameOfTest} onChange={() => this.onNameOfTestHandler(event)} className="form-control" type="text" />
                             </div>
-                            <div style={boxLine} className="col-sm-3">
+                            {/* <div style={boxLine} className="col-sm-3">
                                 <p><strong>Xpert HPV  Lot No. *</strong></p>
                             </div>
                             <div style={boxLine} className="col-sm-3">
 
                                 <input value={this.state.kitLotNo} onChange={() => this.onKitLotHandler(event)} className="form-control" type="text" />
-                            </div>
+                            </div> */}
                         </div>
                         {/* end testing dates */}
                     </div>
