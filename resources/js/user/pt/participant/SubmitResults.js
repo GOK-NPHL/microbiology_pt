@@ -497,9 +497,9 @@ class SubmitResults extends React.Component {
                     </div>
 
                     {/* <div className="col-sm-12  pl-4 pr-4 mt-2"> */}
-                        {/* Test Kit Information */}
-                        {/* Test Kit Information */}
-                        {/* end Test Kit Information */}
+                    {/* Test Kit Information */}
+                    {/* Test Kit Information */}
+                    {/* end Test Kit Information */}
                     {/* </div> */}
 
                     <div className="col-sm-12  pl-4 pr-4">
@@ -524,9 +524,9 @@ class SubmitResults extends React.Component {
                     </div>
 
                     {/* <div style={labInfo} className="col-sm-12  pl-4 pr-4"> */}
-                        {/* kit info */}
-                        {/* <div className="row"> */}
-                            {/* <div style={boxLineLeft} className="col-sm-3">
+                    {/* kit info */}
+                    {/* <div className="row"> */}
+                    {/* <div style={boxLineLeft} className="col-sm-3">
                                 <p><strong>Xpert HPV Date Received *</strong></p>
                             </div>
                             <div style={boxLine} className="col-sm-3">
@@ -542,7 +542,7 @@ class SubmitResults extends React.Component {
                                 <input value={this.state.kitExpiryDate} onChange={() => this.onKitExpiryDateHandler(event)} className="form-control" type="date" />
                             </div>
                         </div> */}
-                        {/* end  kit info  */}
+                    {/* end  kit info  */}
 
                     {/* </div> */}
 
@@ -955,7 +955,11 @@ class SubmitResults extends React.Component {
                         {this.props.isAdmin ? '' :
                             <>
                                 {Date.parse(this.state.endDate) > new Date() && this.props.shipment.readiness_approval_id != null ?
-                                    <button type="button " onClick={() => this.submitForm()} className="btn btn-info float-left mx-2">Submit</button>
+                                    <>
+                                        <button type="button " className="btn btn-info float-left mx-2">Save</button>
+                                        <button type="button " onClick={() => this.submitForm()} className="btn btn-primary float-left mx-2">Submit</button>
+                                    </>
+
                                     : ''
                                 }
                                 <button type="button" onClick={() => {
