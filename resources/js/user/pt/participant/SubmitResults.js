@@ -397,7 +397,7 @@ class SubmitResults extends React.Component {
         }
         let today = new Date().toLocaleDateString();
         let isPtDone = this.state.isPtDone;
-
+        let names = ['Oxidase', 'Indole', 'DNAse', 'Coagulase', 'Catalase', 'Germ tube test  ', 'Urease production ']
         return (
 
             <>
@@ -405,7 +405,7 @@ class SubmitResults extends React.Component {
 
                     <div className="col-sm-12 float-left">
                         <h1 className="float-left">
-                        Microbiology PT Submission form
+                            Microbiology PT Submission form
                             {
                                 Date.parse(this.state.endDate) > new Date() ?
                                     this.props.shipment.readiness_approval_id == null ?
@@ -496,11 +496,11 @@ class SubmitResults extends React.Component {
                         {/* end submission form  header */}
                     </div>
 
-                    <div className="col-sm-12  pl-4 pr-4 mt-2">
+                    {/* <div className="col-sm-12  pl-4 pr-4 mt-2"> */}
                         {/* Test Kit Information */}
-                        Test Kit Information
+                        {/* Test Kit Information */}
                         {/* end Test Kit Information */}
-                    </div>
+                    {/* </div> */}
 
                     <div className="col-sm-12  pl-4 pr-4">
                         {/* testing dates */}
@@ -523,10 +523,10 @@ class SubmitResults extends React.Component {
                         {/* end testing dates */}
                     </div>
 
-                    <div style={labInfo} className="col-sm-12  pl-4 pr-4">
+                    {/* <div style={labInfo} className="col-sm-12  pl-4 pr-4"> */}
                         {/* kit info */}
-                        <div className="row">
-                            <div style={boxLineLeft} className="col-sm-3">
+                        {/* <div className="row"> */}
+                            {/* <div style={boxLineLeft} className="col-sm-3">
                                 <p><strong>Xpert HPV Date Received *</strong></p>
                             </div>
                             <div style={boxLine} className="col-sm-3">
@@ -541,10 +541,10 @@ class SubmitResults extends React.Component {
 
                                 <input value={this.state.kitExpiryDate} onChange={() => this.onKitExpiryDateHandler(event)} className="form-control" type="date" />
                             </div>
-                        </div>
+                        </div> */}
                         {/* end  kit info  */}
 
-                    </div>
+                    {/* </div> */}
 
                     <div className="col-sm-12  pl-4 pr-4 mt-2">
                         {/* Test Kit Information */}
@@ -685,96 +685,264 @@ class SubmitResults extends React.Component {
                     <div id='pt-test-results' style={{ "display": this.state.isPtDone ? "" : "none" }} className="col-sm-12 ">
 
                         {/* PT Test results fields */}
-                        <div className="row ml-5 mr-5">
-                            <div className="col-sm-12">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td rowSpan="2">
-                                                <strong>PT Sample ID</strong>
-                                            </td>
-                                            <td colSpan="3">
-                                                <strong>Visual Results *</strong>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>HR HPV 16</strong></td>
-                                            <td><strong>HR HPV 18-45</strong></td>
-                                            <td><strong>Others HR HPV</strong></td>
-                                        </tr>
+                        <div className="form-row mt-2 bg-white rounded">
+                            <div className="col-sm-12  ml-2">
 
-                                        {/*  PT - Long Term*/}
+                                {/* <h5>Sample log</h5> */}
 
-                                        {this.props.shipment.samples.map((sample) => {
+                                <ul className="nav nav-tabs" id="myTab" role="tablist">
 
-                                            return <tr key={uuidv4()}>
-                                                <td>{sample.sample_name}</td>
-                                                <td >
-                                                    <div className="form-check form-check-inline">
-                                                        <select className="custom-select"
-                                                            value={
-                                                                sample.sample_id in this.state.samples ?
-                                                                    this.state.samples[sample.sample_id]['16'] : ''
-                                                            }
+                                    <li className="nav-item" role="presentation">
+                                        <a className="nav-link active pt-tab-back-ground"
+                                            ref={(el) => el && el.style.setProperty("color", "black", "important")}
+                                            id="list1Tab" data-toggle="tab" href="#list1" role="tab" aria-controls="home" aria-selected="true">
+                                            {/* <i className="fa fa-table" aria-hidden="true"></i>  */}
+                                            Sample A</a>
+                                    </li>
 
-                                                            onChange={() => {
-                                                                this.visualResultsHandler(event, sample.sample_id)
-                                                            }
 
-                                                            }
-                                                            name={this.state.index + "long-term-radio"} data-id={16} >
-                                                            <option hidden>--select--</option>
-                                                            <option>Positive</option>
-                                                            <option>Negative</option>
-                                                            <option>Invalid</option>
-                                                        </select>
+                                    <li className="nav-item" role="presentation">
+                                        <a className="nav-link" id="list2Tab" data-toggle="tab"
+                                            href="#list2" role="tab" aria-controls="profile2"
+                                            aria-selected="false"
+                                            ref={(el) => el && el.style.setProperty("color", "black", "important")}
+                                        >
+                                            Sample B</a>
+                                    </li>
 
-                                                    </div>
-                                                </td>
-                                                <td >
-                                                    <div className="form-check form-check-inline">
-                                                        <select className="custom-select"
-                                                            value={
-                                                                sample.sample_id in this.state.samples ?
-                                                                    this.state.samples[sample.sample_id]['18'] : ''
-                                                            }
-                                                            onChange={() => this.visualResultsHandler(event, sample.sample_id)}
-                                                            name={this.state.index + "long-term-radio"} data-id={18} >
-                                                            <option hidden>--select--</option>
-                                                            <option>Positive</option>
-                                                            <option>Negative</option>
-                                                            <option>Invalid</option>
-                                                        </select>
+                                    <li className="nav-item" role="presentation">
+                                        <a className="nav-link" id="list3Tab" data-toggle="tab"
+                                            href="#list3" role="tab" aria-controls="profile3"
+                                            aria-selected="false"
+                                            ref={(el) => el && el.style.setProperty("color", "black", "important")}
+                                        >
+                                            Sample C</a>
+                                    </li>
 
-                                                    </div>
-                                                </td>
-                                                <td >
+                                    <li className="nav-item" role="presentation">
+                                        <a className="nav-link" id="list4Tab" data-toggle="tab"
+                                            href="#list4" role="tab" aria-controls="profile4"
+                                            aria-selected="false"
+                                            ref={(el) => el && el.style.setProperty("color", "black", "important")}
+                                        >
+                                            Sample D</a>
+                                    </li>
 
-                                                    <div className="form-check form-check-inline">
-                                                        <select className="custom-select"
-                                                            value={
-                                                                sample.sample_id in this.state.samples ?
-                                                                    this.state.samples[sample.sample_id]['other'] : ''
-                                                            }
-                                                            onChange={() => this.visualResultsHandler(event, sample.sample_id)}
-                                                            name={this.state.index + "long-term-radio"} data-id={'other'} >
-                                                            <option hidden>--select--</option>
-                                                            <option>Positive</option>
-                                                            <option>Negative</option>
-                                                            <option>Invalid</option>
-                                                        </select>
+                                    <li className="nav-item" role="presentation">
+                                        <a className="nav-link" id="list5Tab" data-toggle="tab"
+                                            href="#list5" role="tab" aria-controls="profile5"
+                                            aria-selected="false"
+                                            ref={(el) => el && el.style.setProperty("color", "black", "important")}
+                                        >
+                                            Sample E</a>
+                                    </li>
 
-                                                    </div>
+                                </ul>
+                                <div className="tab-content" id="myTabContent">
 
-                                                </td>
+                                    {/* Site agreement rates */}
+                                    <div className="tab-pane fade show active" id="list1" role="list1Tab" aria-labelledby="home-tab">
+                                        <br />
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <h5 style={{ "fontWeight": "bold", "marginBottom": "4px" }} className="card-title">IDENTIFICATION TESTS</h5>
+                                                <p style={{ "fontSize": "13px" }} className="card-text">Select your result from the drop down menu. For Final Identifcation Method, select at least one method. If multiple methods were used, select additional methods. </p>
+                                                <hr />
+                                                <div><u>Basic Biochemical Reaction</u> </div>
 
-                                            </tr>
-                                        })
-                                        }
+                                                <table>
+                                                    {names.map((val) => {
+                                                        return <tr>
+                                                            <td>{val}</td>
+                                                            <td>
+                                                                <select className="form-control" aria-label="Default select example">
+                                                                    <option selected>Open this select menu</option>
+                                                                    <option value="1">Negative</option>
+                                                                    <option value="2">Not Tested</option>
+                                                                    <option value="3">Positive</option>
+                                                                </select>
+                                                            </td>
 
-                                        {/*  End PT - Long Term */}
-                                    </tbody>
-                                </table>
+                                                            <td>Unable to Report Result?</td>
+                                                            <td>
+                                                                <select className="form-control" aria-label="Default select example">
+                                                                    <option selected>Open this select menu</option>
+                                                                    <option value="1">One</option>
+                                                                    <option value="2">Two</option>
+                                                                    <option value="3">Three</option>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                    })}
+
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="tab-pane fade" id="list2" role="list2Tab" aria-labelledby="home-tab">
+                                        <br />
+                                        <br />
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <h5 style={{ "fontWeight": "bold", "marginBottom": "4px" }} className="card-title">IDENTIFICATION TESTS</h5>
+                                                <p style={{ "fontSize": "13px" }} className="card-text">Select your result from the drop down menu. For Final Identifcation Method, select at least one method. If multiple methods were used, select additional methods. </p>
+                                                <hr />
+                                                <div><u>Basic Biochemical Reaction</u> </div>
+
+                                                <table>
+                                                    {names.map((val) => {
+                                                        return <tr>
+                                                            <td>{val}</td>
+                                                            <td>
+                                                                <select className="form-control" aria-label="Default select example">
+                                                                    <option selected>Open this select menu</option>
+                                                                    <option value="1">Negative</option>
+                                                                    <option value="2">Not Tested</option>
+                                                                    <option value="3">Positive</option>
+                                                                </select>
+                                                            </td>
+
+                                                            <td>Unable to Report Result?</td>
+                                                            <td>
+                                                                <select className="form-control" aria-label="Default select example">
+                                                                    <option selected>Open this select menu</option>
+                                                                    <option value="1">One</option>
+                                                                    <option value="2">Two</option>
+                                                                    <option value="3">Three</option>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                    })}
+
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="tab-pane fade" id="list3" role="list3Tab" aria-labelledby="home-tab">
+                                        <br />
+                                        <br />
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <h5 style={{ "fontWeight": "bold", "marginBottom": "4px" }} className="card-title">IDENTIFICATION TESTS</h5>
+                                                <p style={{ "fontSize": "13px" }} className="card-text">Select your result from the drop down menu. For Final Identifcation Method, select at least one method. If multiple methods were used, select additional methods. </p>
+                                                <hr />
+                                                <div><u>Basic Biochemical Reaction</u> </div>
+
+                                                <table>
+                                                    {names.map((val) => {
+                                                        return <tr>
+                                                            <td>{val}</td>
+                                                            <td>
+                                                                <select className="form-control" aria-label="Default select example">
+                                                                    <option selected>Open this select menu</option>
+                                                                    <option value="1">Negative</option>
+                                                                    <option value="2">Not Tested</option>
+                                                                    <option value="3">Positive</option>
+                                                                </select>
+                                                            </td>
+
+                                                            <td>Unable to Report Result?</td>
+                                                            <td>
+                                                                <select className="form-control" aria-label="Default select example">
+                                                                    <option selected>Open this select menu</option>
+                                                                    <option value="1">One</option>
+                                                                    <option value="2">Two</option>
+                                                                    <option value="3">Three</option>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                    })}
+
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="tab-pane fade" id="list4" role="list4Tab" aria-labelledby="home-tab">
+                                        <br />
+                                        <br />
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <h5 style={{ "fontWeight": "bold", "marginBottom": "4px" }} className="card-title">IDENTIFICATION TESTS</h5>
+                                                <p style={{ "fontSize": "13px" }} className="card-text">Select your result from the drop down menu. For Final Identifcation Method, select at least one method. If multiple methods were used, select additional methods. </p>
+                                                <hr />
+                                                <div><u>Basic Biochemical Reaction</u> </div>
+
+                                                <table>
+                                                    {names.map((val) => {
+                                                        return <tr>
+                                                            <td>{val}</td>
+                                                            <td>
+                                                                <select className="form-control" aria-label="Default select example">
+                                                                    <option selected>Open this select menu</option>
+                                                                    <option value="1">Negative</option>
+                                                                    <option value="2">Not Tested</option>
+                                                                    <option value="3">Positive</option>
+                                                                </select>
+                                                            </td>
+
+                                                            <td>Unable to Report Result?</td>
+                                                            <td>
+                                                                <select className="form-control" aria-label="Default select example">
+                                                                    <option selected>Open this select menu</option>
+                                                                    <option value="1">One</option>
+                                                                    <option value="2">Two</option>
+                                                                    <option value="3">Three</option>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                    })}
+
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="tab-pane fade" id="list5" role="list5Tab" aria-labelledby="home-tab">
+                                        <br />
+                                        <br />
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <h5 style={{ "fontWeight": "bold", "marginBottom": "4px" }} className="card-title">IDENTIFICATION TESTS</h5>
+                                                <p style={{ "fontSize": "13px" }} className="card-text">Select your result from the drop down menu. For Final Identifcation Method, select at least one method. If multiple methods were used, select additional methods. </p>
+                                                <hr />
+                                                <div><u>Basic Biochemical Reaction</u> </div>
+
+                                                <table>
+                                                    {names.map((val) => {
+                                                        return <tr>
+                                                            <td>{val}</td>
+                                                            <td>
+                                                                <select className="form-control" aria-label="Default select example">
+                                                                    <option selected>Open this select menu</option>
+                                                                    <option value="1">Negative</option>
+                                                                    <option value="2">Not Tested</option>
+                                                                    <option value="3">Positive</option>
+                                                                </select>
+                                                            </td>
+
+                                                            <td>Unable to Report Result?</td>
+                                                            <td>
+                                                                <select className="form-control" aria-label="Default select example">
+                                                                    <option selected>Open this select menu</option>
+                                                                    <option value="1">One</option>
+                                                                    <option value="2">Two</option>
+                                                                    <option value="3">Three</option>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                    })}
+
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
                         </div>

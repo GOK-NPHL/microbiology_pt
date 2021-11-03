@@ -31,7 +31,7 @@ class Dashboard extends React.Component {
             //
             page: 'list',
             listingName: ' Samples Submitted tests',
-            listing: 'submitted',
+            listing: 'pending',
             readiness: []
         }
         this.handlePageChange = this.handlePageChange.bind(this);
@@ -272,20 +272,6 @@ class Dashboard extends React.Component {
                 <hr />
             </div>
 
-            <div className="form-check form-check-inline  mt-2">
-                <input
-                    onClick={() => {
-                        this.setState({
-                            listingName: 'Samples Submitted tests',
-                            listing: 'submitted'
-                        })
-                    }}
-                    defaultChecked={this.state.listing == 'submitted'}
-                    className="form-check-input" type="radio"
-                    name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                <label className="form-check-label" htmlFor="inlineRadio2">View submitted results</label>
-            </div>
-
             <div className="form-check form-check-inline pl-2 mt-2">
                 <input
                     onClick={() => {
@@ -311,6 +297,20 @@ class Dashboard extends React.Component {
                     defaultChecked={this.state.listing == 'readiness'} className="form-check-input"
                     type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" />
                 <label className="form-check-label" htmlFor="inlineRadio3">View readiness</label>
+            </div>
+
+            <div className="form-check form-check-inline  mt-2">
+                <input
+                    onClick={() => {
+                        this.setState({
+                            listingName: 'Samples Submitted tests',
+                            listing: 'submitted'
+                        })
+                    }}
+                    defaultChecked={this.state.listing == 'submitted'}
+                    className="form-check-input" type="radio"
+                    name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                <label className="form-check-label" htmlFor="inlineRadio2">View submitted results</label>
             </div>
 
         </div>

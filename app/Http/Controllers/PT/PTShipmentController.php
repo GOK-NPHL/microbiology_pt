@@ -277,7 +277,7 @@ class PTShipmentController extends Controller
             }
 
             $shipments = $shipments->join('laboratory_pt_shipement', 'laboratory_pt_shipement.pt_shipement_id', '=', 'pt_shipements.id')
-                ->join('pt_samples', 'pt_samples.ptshipment_id', '=', 'pt_shipements.id')
+                ->leftJoin('pt_samples', 'pt_samples.ptshipment_id', '=', 'pt_shipements.id')
                 ->join('laboratories', 'laboratory_pt_shipement.laboratory_id', '=', 'laboratories.id')
                 ->join('users', 'users.laboratory_id', '=', 'laboratories.id');
 
@@ -298,10 +298,11 @@ class PTShipmentController extends Controller
                 "pt_samples.id as sample_id",
                 "pt_samples.name as sample_name",
                 "ptsubmissions.id as submission_id",
+                "users.id as user_id",
                 "readiness_answers.id as is_readiness_answered", //check if readiness for this shipment id filled
                 "pt_shipements.readiness_id as readiness_id",
                 "readiness_approvals.id as readiness_approval_id",
-                "users.id as user_id",
+
             );
 
             if ($submission_id == null) {
@@ -322,11 +323,14 @@ class PTShipmentController extends Controller
             } else {
                 $shipments2 = $shipments2->where('ptsubmissions.id', $submission_id);
             }
-
+            Log::info($shipments->get());
+            Log::info("====================");
+            Log::info($shipments2->get());
             $shipments2 = $shipments2
                 ->union($shipments)
                 ->get();
-
+            Log::info("====================");
+            Log::info($shipments2);
             $payload = [];
             $sampleIds = [];
 

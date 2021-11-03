@@ -175,17 +175,13 @@ class ParticipantController extends Controller
             $userId = null;
             try {
                 if ($request->id) {
-                    Log::info("one");
                     $userId = $request->id;
                 } else {
-                    Log::info("tow");
                     $user = Auth::user();
                     $userId = $user->id;
                 }
             } catch (Exception $ex) {
             }
-
-            Log::info($userId);
 
             $usersDemo = User::select(
                 'users.id as user_id',
