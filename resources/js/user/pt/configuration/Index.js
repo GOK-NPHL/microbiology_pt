@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { v4 as uuidv4 } from 'uuid';
 import Pagination from "react-js-pagination";
 import { FetchShipments } from '../../../components/utils/Helpers';
-
+import Microscopy from './microscopy/Microscopy';
 
 class Index extends React.Component {
 
@@ -11,9 +11,9 @@ class Index extends React.Component {
         super(props);
         this.state = {
             windowPeriod: 0,
-            currentScreen: 'Gram-Stain',
-            screens: ['Gram-Stain', 'Identification-Tests', 'Serotyping-Serogrouping',
-                'Final-Organism-Detection', 'Antimicrobial-Susceptibility-Testing', 'Mechanisms-of-Resistance']
+            currentScreen: 'Microscopy',
+            screens: ['Microscopy', 'Identification-Tests', 'Serotyping-Serogrouping',
+                'Final-Organism-Detection', 'Antimicrobial-Susceptibility-Testing', 'Mechanisms-of-Resistance', 'General-Tests-Settings ']
         }
         this.windowPeriodhandler = this.windowPeriodhandler.bind(this);
     }
@@ -82,7 +82,7 @@ class Index extends React.Component {
                                                 currentScreen: this.state.screens[0]
                                             })
                                         }}
-                                    >Gram Stain</a>
+                                    >Microscopy</a>
                                 </li>
                                 <li className="list-group-item">
                                     <a href="#"
@@ -130,6 +130,16 @@ class Index extends React.Component {
                                     >Mechanisms of Resistance </a>
                                 </li>
 
+                                <li className="list-group-item">
+                                    <a href="#"
+                                        onClick={() => {
+                                            this.setState({
+                                                currentScreen: this.state.screens[6]
+                                            })
+                                        }}
+                                    >General tests settings </a>
+                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -137,33 +147,16 @@ class Index extends React.Component {
                     {/* Settings body */}
                     <div className="col-sm-8">
 
-                        {/* Gram stain settings */}
-                        <div hidden={this.state.currentScreen != 'Gram-Stain'} className="card">
+                        {/* Microscopy settings */}
+                        <div hidden={this.state.currentScreen != this.state.screens[0]} className="card">
+                            <h3 class=" ml-3"><u>{this.state.currentScreen}</u></h3>
 
-                            <ul className="list-group list-group-flush">
-                                <li className="list-group-item">
-                                    <h6>Gram Stain Reaction</h6>
-                                    <label htmlFor="window_period">Length</label>
-                                    <input type="number" onChange={
-                                        (event) => this.windowPeriodhandler(event.target.value, "window_period")
-                                    }
-                                        value={this.state.windowPeriod} className="form-control" id="window_period" required />
-                                </li>
-                                <li className="list-group-item">
-                                    <h6>Gram Stain Morphology</h6>
-                                    <label htmlFor="window_period">Length</label>
-                                    <input type="number" onChange={
-                                        (event) => this.windowPeriodhandler(event.target.value, "window_period")
-                                    }
-                                        value={this.state.windowPeriod} className="form-control" id="window_period" required />
-                                </li>
-
-                            </ul>
+                            <Microscopy />
                         </div>
 
                         {/* Indentification tests settings */}
-                        <div hidden={this.state.currentScreen != 'Identification-Tests'} className="card">
-
+                        <div hidden={this.state.currentScreen != this.state.screens[1]} className="card">
+                            <h3 class=" ml-3"><u>{this.state.currentScreen}</u></h3>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
                                     <h6>Basic Biochemical Reaction </h6>
@@ -186,8 +179,8 @@ class Index extends React.Component {
                         </div>
 
                         {/* Serotyping settings */}
-                        <div hidden={this.state.currentScreen != 'Serotyping-Serogrouping'} className="card">
-
+                        <div hidden={this.state.currentScreen != this.state.screens[2]} className="card">
+                            <h3 class=" ml-3"><u>{this.state.currentScreen}</u></h3>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
                                     <h6>Serotyping / Serogrouping  </h6>
@@ -203,8 +196,8 @@ class Index extends React.Component {
                         </div>
 
                         {/* Final Organism Detection */}
-                        <div hidden={this.state.currentScreen != 'Final-Organism-Detection'} className="card">
-
+                        <div hidden={this.state.currentScreen != this.state.screens[3]} className="card">
+                            <h3 class=" ml-3"><u>{this.state.currentScreen}</u></h3>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
                                     <h6>Final Organism Detection  </h6>
@@ -219,8 +212,8 @@ class Index extends React.Component {
                         </div>
 
                         {/* Antimicrobial Susceptibility Testing */}
-                        <div hidden={this.state.currentScreen != 'Antimicrobial-Susceptibility-Testing'} className="card">
-
+                        <div hidden={this.state.currentScreen != this.state.screens[4]} className="card">
+                            <h3 class=" ml-3"><u>{this.state.currentScreen}</u></h3>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
                                     <h6>Disk Diffusion Method </h6>
@@ -263,11 +256,27 @@ class Index extends React.Component {
                         </div>
 
                         {/* Mechanisms of Resistance */}
-                        <div hidden={this.state.currentScreen != 'Mechanisms-of-Resistance'} className="card">
-
+                        <div hidden={this.state.currentScreen != this.state.screens[5]} className="card">
+                            <h3 class=" ml-3"><u>{this.state.currentScreen}</u></h3>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
                                     <h6>Mechanisms of Resistance  </h6>
+                                    <label htmlFor="window_period">Length</label>
+                                    <input type="number" onChange={
+                                        (event) => this.windowPeriodhandler(event.target.value, "window_period")
+                                    }
+                                        value={this.state.windowPeriod} className="form-control" id="window_period" required />
+                                </li>
+
+                            </ul>
+                        </div>
+
+                        {/* General tests settings */}
+                        <div hidden={this.state.currentScreen != this.state.screens[6]} className="card">
+                            <h3 class=" ml-3"><u>{this.state.currentScreen}</u></h3>
+                            <ul className="list-group list-group-flush">
+                                <li className="list-group-item">
+                                    <h6>Unable to test reasons  </h6>
                                     <label htmlFor="window_period">Length</label>
                                     <input type="number" onChange={
                                         (event) => this.windowPeriodhandler(event.target.value, "window_period")
