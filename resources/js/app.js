@@ -41,6 +41,7 @@ require('./user/pt/reports/ListShipmentReport');
 require('./user/pt/reports/ListShipmentResponseReport');
 require('./user/pt/reports/PTPerformanceReport');
 
+require('./user/pt/configuration/Index');
 
 require('./user/general/Dashboard');
 //Intrface code

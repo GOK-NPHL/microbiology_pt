@@ -23,6 +23,5 @@ class ptsubmission extends Model
         "lab_id",
         "user_id",
         "tester_name",
-        "platform_id"
     ];
 }

@@ -72,4 +72,8 @@ class PTAdminController extends Controller
     {
         return view('user.pt.reports.pt_perfornance_report');
     }
+    public function getConfigurations()
+    {
+        return view('user.pt.configuration.index');
+    }
 }
