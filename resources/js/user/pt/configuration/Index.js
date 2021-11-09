@@ -10,7 +10,10 @@ class Index extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            windowPeriod: 0
+            windowPeriod: 0,
+            currentScreen: 'Gram-Stain',
+            screens: ['Gram-Stain', 'Identification-Tests', 'Serotyping-Serogrouping',
+                'Final-Organism-Detection', 'Antimicrobial-Susceptibility-Testing', 'Mechanisms-of-Resistance']
         }
         this.windowPeriodhandler = this.windowPeriodhandler.bind(this);
     }
@@ -73,20 +76,60 @@ class Index extends React.Component {
                             </div>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
-                                    <a href="#">Gram Stain</a>
+                                    <a href="#"
+                                        onClick={() => {
+                                            this.setState({
+                                                currentScreen: this.state.screens[0]
+                                            })
+                                        }}
+                                    >Gram Stain</a>
                                 </li>
                                 <li className="list-group-item">
-                                    <a href="#">Identification Tests</a>
+                                    <a href="#"
+                                        onClick={() => {
+                                            this.setState({
+                                                currentScreen: this.state.screens[1]
+                                            })
+                                        }}
+                                    >Identification Tests</a>
                                 </li>
                                 <li className="list-group-item">
-                                    <a href="#">Serotyping / Serogrouping </a>
+                                    <a href="#"
+                                        onClick={() => {
+                                            this.setState({
+                                                currentScreen: this.state.screens[2]
+                                            })
+                                        }}
+                                    >Serotyping / Serogrouping </a>
                                 </li>
                                 <li className="list-group-item">
-                                    <a href="#">Final Organism Detection </a>
+                                    <a href="#"
+                                        onClick={() => {
+                                            this.setState({
+                                                currentScreen: this.state.screens[3]
+                                            })
+                                        }}
+                                    >Final Organism Detection </a>
                                 </li>
                                 <li className="list-group-item">
-                                    <a href="#">Antimicrobial Susceptibility Testing </a>
+                                    <a href="#"
+                                        onClick={() => {
+                                            this.setState({
+                                                currentScreen: this.state.screens[4]
+                                            })
+                                        }}
+                                    >Antimicrobial Susceptibility Testing </a>
                                 </li>
+                                <li className="list-group-item">
+                                    <a href="#"
+                                        onClick={() => {
+                                            this.setState({
+                                                currentScreen: this.state.screens[5]
+                                            })
+                                        }}
+                                    >Mechanisms of Resistance </a>
+                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -95,7 +138,7 @@ class Index extends React.Component {
                     <div className="col-sm-8">
 
                         {/* Gram stain settings */}
-                        <div className="card">
+                        <div hidden={this.state.currentScreen != 'Gram-Stain'} className="card">
 
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
@@ -119,7 +162,7 @@ class Index extends React.Component {
                         </div>
 
                         {/* Indentification tests settings */}
-                        <div className="card">
+                        <div hidden={this.state.currentScreen != 'Identification-Tests'} className="card">
 
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
@@ -143,7 +186,7 @@ class Index extends React.Component {
                         </div>
 
                         {/* Serotyping settings */}
-                        <div className="card">
+                        <div hidden={this.state.currentScreen != 'Serotyping-Serogrouping'} className="card">
 
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
@@ -160,7 +203,7 @@ class Index extends React.Component {
                         </div>
 
                         {/* Final Organism Detection */}
-                        <div className="card">
+                        <div hidden={this.state.currentScreen != 'Final-Organism-Detection'} className="card">
 
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
@@ -176,7 +219,7 @@ class Index extends React.Component {
                         </div>
 
                         {/* Antimicrobial Susceptibility Testing */}
-                        <div className="card">
+                        <div hidden={this.state.currentScreen != 'Antimicrobial-Susceptibility-Testing'} className="card">
 
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
@@ -190,6 +233,41 @@ class Index extends React.Component {
 
                                 <li className="list-group-item">
                                     <h6>MIC Method  </h6>
+                                    <label htmlFor="window_period">Length</label>
+                                    <input type="number" onChange={
+                                        (event) => this.windowPeriodhandler(event.target.value, "window_period")
+                                    }
+                                        value={this.state.windowPeriod} className="form-control" id="window_period" required />
+                                </li>
+
+                                <li className="list-group-item">
+                                    <h6>Antibiotics  </h6>
+                                    <label htmlFor="window_period">Length</label>
+                                    <input type="number" onChange={
+                                        (event) => this.windowPeriodhandler(event.target.value, "window_period")
+                                    }
+                                        value={this.state.windowPeriod} className="form-control" id="window_period" required />
+                                </li>
+
+                                <li className="list-group-item">
+                                    <h6>Disk Manufacturers  </h6>
+                                    <label htmlFor="window_period">Length</label>
+                                    <input type="number" onChange={
+                                        (event) => this.windowPeriodhandler(event.target.value, "window_period")
+                                    }
+                                        value={this.state.windowPeriod} className="form-control" id="window_period" required />
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                        {/* Mechanisms of Resistance */}
+                        <div hidden={this.state.currentScreen != 'Mechanisms-of-Resistance'} className="card">
+
+                            <ul className="list-group list-group-flush">
+                                <li className="list-group-item">
+                                    <h6>Mechanisms of Resistance  </h6>
                                     <label htmlFor="window_period">Length</label>
                                     <input type="number" onChange={
                                         (event) => this.windowPeriodhandler(event.target.value, "window_period")
