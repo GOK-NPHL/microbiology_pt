@@ -1,3 +1,12 @@
 .congigItem:hover {
     background-color: #c7ced9;
 }
+
+.pointerCursor {
+    cursor: pointer;
+}
+
+.itemNamesListing {
+    height: 120px;
+    overflow: auto;
+}

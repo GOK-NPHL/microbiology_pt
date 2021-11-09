@@ -149,14 +149,14 @@ class Index extends React.Component {
 
                         {/* Microscopy settings */}
                         <div hidden={this.state.currentScreen != this.state.screens[0]} className="card">
-                            <h3 class=" ml-3"><u>{this.state.currentScreen}</u></h3>
+                            <h3 className=" ml-3"><u>{this.state.currentScreen}</u></h3>
 
                             <Microscopy />
                         </div>
 
                         {/* Indentification tests settings */}
                         <div hidden={this.state.currentScreen != this.state.screens[1]} className="card">
-                            <h3 class=" ml-3"><u>{this.state.currentScreen}</u></h3>
+                            <h3 className=" ml-3"><u>{this.state.currentScreen}</u></h3>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
                                     <h6>Basic Biochemical Reaction </h6>
@@ -180,7 +180,7 @@ class Index extends React.Component {
 
                         {/* Serotyping settings */}
                         <div hidden={this.state.currentScreen != this.state.screens[2]} className="card">
-                            <h3 class=" ml-3"><u>{this.state.currentScreen}</u></h3>
+                            <h3 className=" ml-3"><u>{this.state.currentScreen}</u></h3>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
                                     <h6>Serotyping / Serogrouping  </h6>
@@ -197,7 +197,7 @@ class Index extends React.Component {
 
                         {/* Final Organism Detection */}
                         <div hidden={this.state.currentScreen != this.state.screens[3]} className="card">
-                            <h3 class=" ml-3"><u>{this.state.currentScreen}</u></h3>
+                            <h3 className=" ml-3"><u>{this.state.currentScreen}</u></h3>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
                                     <h6>Final Organism Detection  </h6>
@@ -213,7 +213,7 @@ class Index extends React.Component {
 
                         {/* Antimicrobial Susceptibility Testing */}
                         <div hidden={this.state.currentScreen != this.state.screens[4]} className="card">
-                            <h3 class=" ml-3"><u>{this.state.currentScreen}</u></h3>
+                            <h3 className=" ml-3"><u>{this.state.currentScreen}</u></h3>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
                                     <h6>Disk Diffusion Method </h6>
@@ -257,7 +257,7 @@ class Index extends React.Component {
 
                         {/* Mechanisms of Resistance */}
                         <div hidden={this.state.currentScreen != this.state.screens[5]} className="card">
-                            <h3 class=" ml-3"><u>{this.state.currentScreen}</u></h3>
+                            <h3 className=" ml-3"><u>{this.state.currentScreen}</u></h3>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
                                     <h6>Mechanisms of Resistance  </h6>
@@ -273,7 +273,7 @@ class Index extends React.Component {
 
                         {/* General tests settings */}
                         <div hidden={this.state.currentScreen != this.state.screens[6]} className="card">
-                            <h3 class=" ml-3"><u>{this.state.currentScreen}</u></h3>
+                            <h3 className=" ml-3"><u>{this.state.currentScreen}</u></h3>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
                                     <h6>Unable to test reasons  </h6>

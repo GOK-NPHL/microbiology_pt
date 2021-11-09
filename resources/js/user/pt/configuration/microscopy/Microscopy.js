@@ -7,9 +7,9 @@ class Microscopy extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            gramStainItems: []
         }
-        this.windowPeriodhandler = this.windowPeriodhandler.bind(this);
+        this.gramStainReactionHanler = this.gramStainReactionHanler.bind(this);
     }
 
     componentDidMount() {
@@ -37,9 +37,19 @@ class Microscopy extends React.Component {
         })();
     }
 
-    windowPeriodhandler(value, name) {
+    gramStainReactionHanler() {
+
+        let gramStain = document.getElementById("gram-stain-reaction").value;
+        let gramStainItems = this.state.gramStainItems;
+        let id = uuidv4();
+        let item = <li key={id} className="congigItem">
+            <span style={{ "float": "left" }}> {gramStain}</span>
+            <span className="pointerCursor" style={{ "float": "right", "marginRight": "6px" }}> &#10006; </span>
+        </li>;
+        gramStainItems.push(item);
+
         this.setState({
-            windowPeriod: value
+            gramStainItems: gramStainItems
         });
 
         (async () => {
@@ -66,32 +76,28 @@ class Microscopy extends React.Component {
                         <h6>Gram Stain Reaction</h6>
 
                         <div className="input-group mb-3">
-                            <input type="text" className="form-control" placeholder="gram stain reaction name" aria-label="gram stain reaction name" aria-describedby="basic-addon2" />
+                            <input type="text" className="form-control" placeholder="gram stain reaction name"
+                                aria-label="gram stain reaction name"
+                                id="gram-stain-reaction"
+                                aria-describedby="basic-addon2" />
                             <div className="input-group-append">
-                                <button type="button" className="btn btn-info"> Add Gram Stain Reaction</button>
+                                <button type="button"
+                                    onClick={() => this.gramStainReactionHanler()}
+                                    className="btn btn-info"> Add Gram Stain Reaction</button>
                             </div>
                         </div>
 
                         <div className="card">
-                            <ul style={{ "height": "120px", "overflow": "auto" }}>
-                                <li className="congigItem">
+                            <ul className="itemNamesListing">
+                                {
+                                    this.state.gramStainItems.map((item) => {
+                                        return item;
+                                    })
+                                }
+                                {/* <li className="congigItem">
                                     <span style={{ "float": "left" }}> 1</span>
-                                    <span style={{ "float": "right", "marginRight": "6px" }}> x</span>
-                                </li>
-                                <li>1</li>
-                                <li>1</li>
-                                <li>1</li>
-                                <li>1</li>
-                                <li>1</li>
-                                <li>1</li>
-                                <li>1</li>
-                                <li>1</li>
-                                <li>1</li>
-                                <li>1</li>
-                                <li>1</li>
-                                <li>1</li>
-                                <li>1</li>
-                                <li>1</li>
+                                    <span className="pointerCursor" style={{ "float": "right", "marginRight": "6px" }}> x</span>
+                                </li> */}
                             </ul>
                         </div>
                     </li>
