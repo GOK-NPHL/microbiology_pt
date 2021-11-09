@@ -44,7 +44,17 @@ class Microscopy extends React.Component {
         let id = uuidv4();
         let item = <li key={id} className="congigItem">
             <span style={{ "float": "left" }}> {gramStain}</span>
-            <span className="pointerCursor" style={{ "float": "right", "marginRight": "6px" }}> &#10006; </span>
+            <span data-id={gramStainItems.length} className="pointerCursor"
+                onClick={(event) => {
+                    let items = this.state.gramStainItems;
+                    delete items[event.target.dataset.id]
+                    this.setState({
+                        gramStainItems: items
+                    });
+                }}
+                style={{ "float": "right", "marginRight": "6px" }}
+                data-toggle="tooltip" data-placement="bottom" title="Delete item"
+            > &#10006; </span>
         </li>;
         gramStainItems.push(item);
 
@@ -91,7 +101,7 @@ class Microscopy extends React.Component {
                             <ul className="itemNamesListing">
                                 {
                                     this.state.gramStainItems.map((item) => {
-                                        return item;
+                                        if (item) return item;
                                     })
                                 }
                                 {/* <li className="congigItem">
