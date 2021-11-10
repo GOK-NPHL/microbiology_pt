@@ -610,3 +610,20 @@ export async function FetchShipmentResponsesReport(id) {
         return err.response
     }
 }
+
+export async function SaveMicroscopyConfig(config) {
+    try {
+        const response = await axios({
+            method: 'post',
+            url: `${settings.serverBaseApi}/save_microscopy_config`,
+            data: {
+                config: config,
+            }
+        });
+        return response;
+    } catch (err) {
+        // Handle Error Here
+        console.log(err);
+        return err.response
+    }
+}

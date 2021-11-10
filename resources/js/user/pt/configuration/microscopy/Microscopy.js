@@ -1,5 +1,6 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { SaveMicroscopyConfig } from '../../../../components/utils/Helpers';
 import '../config.css'
 
 class Microscopy extends React.Component {
@@ -7,7 +8,9 @@ class Microscopy extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            gramStainItems: []
+            gramStainItems: [],
+            gramStainShouldIncludeOtherOption: false,
+            message: ''
         }
         this.gramStainReactionHanler = this.gramStainReactionHanler.bind(this);
     }
@@ -40,7 +43,32 @@ class Microscopy extends React.Component {
     gramStainReactionHanler() {
 
         let gramStain = document.getElementById("gram-stain-reaction").value;
+
+        if (gramStain == '' || gramStain == null || gramStain == undefined) {
+            this.setState({
+                message: "Gram stain reaction name cannot be empty",
+            });
+            $('#microscopyMessageModal').modal('toggle');
+
+            return;
+        }
+
         let gramStainItems = this.state.gramStainItems;
+
+        (async () => {
+
+            let response = await SaveMicroscopyConfig(config);
+
+            if (response.status == 500) {
+                this.setState({
+                    message: response.data.Message,
+                });
+                $('#settingModal').modal('toggle');
+            }
+
+        })();
+
+
         let id = uuidv4();
         let item = <li key={id} className="congigItem">
             <span style={{ "float": "left" }}> {gramStain}</span>
@@ -62,18 +90,7 @@ class Microscopy extends React.Component {
             gramStainItems: gramStainItems
         });
 
-        (async () => {
 
-            // let response = await SaveFcdrrSetting(value, name);
-
-            // if (response.status == 500) {
-            //     this.setState({
-            //         message: response.data.Message,
-            //     });
-            //     $('#settingModal').modal('toggle');
-            // }
-
-        })();
     }
 
     render() {
@@ -98,6 +115,16 @@ class Microscopy extends React.Component {
                         </div>
 
                         <div className="card">
+                            <div className="input-group" style={{ "marginBottom": "15px" }}>
+                                <input className="form-control border-end-0 border rounded-pill"
+                                    type="text" placeholder="search" id="example-search-input" />
+                                <span className="input-group-append">
+                                    <button className="btn btn-outline-secondary bg-white border-start-0 border rounded-pill ms-n3" type="button">
+                                        <i className="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <br />
                             <ul className="itemNamesListing">
                                 {
                                     this.state.gramStainItems.map((item) => {
@@ -110,6 +137,21 @@ class Microscopy extends React.Component {
                                 </li> */}
                             </ul>
                         </div>
+
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" onChange={(event) => {
+                                this.setState({
+                                    gramStainShouldIncludeOtherOption: !this.state.gramStainShouldIncludeOtherOption
+                                })
+                            }
+
+                            }
+                                id="flexCheckChecked" checked={this.state.gramStainShouldIncludeOtherOption} />
+                            <label className="form-check-label" htmlFor="flexCheckChecked">
+                                Should include  other field option
+                            </label>
+                        </div>
+
                     </li>
 
                     <li className="list-group-item">
@@ -119,6 +161,29 @@ class Microscopy extends React.Component {
                     </li>
 
                 </ul>
+
+                {/* Message modal */}
+                <div className="modal fade" id="microscopyMessageModal" tabIndex="-1" role="dialog" aria-labelledby="microscopyMessageModalTitle" aria-hidden="true" >
+                    <div className="modal-dialog modal-dialog-centered" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="microscopyMessageModalTitle">Notice!</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div id="microscopyMessageModal" className="modal-body">
+                                {
+                                    this.state.message ? this.state.message : ''
+                                }
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div >
+                {/* End Message modal */}
 
             </React.Fragment>
         );

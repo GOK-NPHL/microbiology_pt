@@ -28,7 +28,7 @@ class Index extends React.Component {
             //     this.setState({
             //         message: response.data.Message,
             //     });
-            //     $('#settingModal').modal('toggle');
+            //     $('#messageModal').modal('toggle');
             // } else {
             //     response.map((setting) => {
             //         if (setting.name == 'window_period') {
@@ -56,7 +56,7 @@ class Index extends React.Component {
             //     this.setState({
             //         message: response.data.Message,
             //     });
-            //     $('#settingModal').modal('toggle');
+            //     $('#messageModal').modal('toggle');
             // }
 
         })();
@@ -291,16 +291,16 @@ class Index extends React.Component {
                 </div>
 
                 {/* Message modal */}
-                <div className="modal fade" id="settingModal" tabIndex="-1" role="dialog" aria-labelledby="settingModalTitle" aria-hidden="true" >
+                <div className="modal fade" id="messageModal" tabIndex="-1" role="dialog" aria-labelledby="messageModalTitle" aria-hidden="true" >
                     <div className="modal-dialog modal-dialog-centered" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="settingModalTitle">Notice!</h5>
+                                <h5 className="modal-title" id="messageModalTitle">Notice!</h5>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div className="modal-body">
+                            <div id="messageModal" className="modal-body">
                                 {
                                     this.state.message ? this.state.message : ''
                                 }
