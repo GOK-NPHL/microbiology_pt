@@ -613,14 +613,15 @@ export async function FetchShipmentResponsesReport(id) {
 
 export async function SaveMicroscopyConfig(config) {
     try {
-        const response = await axios({
-            method: 'post',
-            url: `${settings.serverBaseApi}/save_microscopy_config`,
-            data: {
-                config: config,
-            }
-        });
-        return response;
+        console.log(config);
+        // const response = await axios({
+        //     method: 'post',
+        //     url: `${settings.serverBaseApi}/save_microscopy_config`,
+        //     data: {
+        //         config: config,
+        //     }
+        // });
+        // return response;
     } catch (err) {
         // Handle Error Here
         console.log(err);

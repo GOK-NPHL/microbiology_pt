@@ -8,12 +8,16 @@ class Microscopy extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            _gramStainItems: [],
             gramStainItems: [],
             gramStainShouldIncludeOtherOption: false,
             message: ''
         }
         this.gramStainReactionHanler = this.gramStainReactionHanler.bind(this);
+        this.saveMicroscopyConfig = this.saveMicroscopyConfig.bind(this);
+
     }
+
 
     componentDidMount() {
         (async () => {
@@ -40,6 +44,7 @@ class Microscopy extends React.Component {
         })();
     }
 
+
     gramStainReactionHanler() {
 
         let gramStain = document.getElementById("gram-stain-reaction").value;
@@ -54,19 +59,7 @@ class Microscopy extends React.Component {
         }
 
         let gramStainItems = this.state.gramStainItems;
-
-        (async () => {
-
-            let response = await SaveMicroscopyConfig(config);
-
-            if (response.status == 500) {
-                this.setState({
-                    message: response.data.Message,
-                });
-                $('#settingModal').modal('toggle');
-            }
-
-        })();
+        let _gramStainItems = this.state._gramStainItems;
 
 
         let id = uuidv4();
@@ -74,27 +67,65 @@ class Microscopy extends React.Component {
             <span style={{ "float": "left" }}> {gramStain}</span>
             <span data-id={gramStainItems.length} className="pointerCursor"
                 onClick={(event) => {
+
                     let items = this.state.gramStainItems;
+                    let _items = this.state._gramStainItems;
+
                     delete items[event.target.dataset.id]
+                    let item = _items[event.target.dataset.id]
+                    item.deleted = 1;
+                    _items[event.target.dataset.id] = item;
                     this.setState({
-                        gramStainItems: items
+                        gramStainItems: items,
+                        _gramStainItems: _items
                     });
                 }}
                 style={{ "float": "right", "marginRight": "6px" }}
                 data-toggle="tooltip" data-placement="bottom" title="Delete item"
             > &#10006; </span>
         </li>;
+
+        let newItem = {
+            id: null,
+            deleted: 0,
+            name: gramStain
+        }
+
+        _gramStainItems.push(newItem);
         gramStainItems.push(item);
 
         this.setState({
-            gramStainItems: gramStainItems
+            gramStainItems: gramStainItems,
+            _gramStainItems: _gramStainItems
         });
 
-
+        this.saveMicroscopyConfig();
     }
 
-    render() {
 
+    saveMicroscopyConfig() {
+
+        (async () => {
+
+            let config = {
+                items: this.state._gramStainItems,
+                other_option: this.state.gramStainShouldIncludeOtherOption
+            }
+
+            let response = await SaveMicroscopyConfig(config);
+
+            if (response.status == 500) {
+                this.setState({
+                    message: response.data.Message,
+                });
+                $('#microscopyMessageModal').modal('toggle');
+            }
+
+        })();
+    }
+
+
+    render() {
 
         return (
             <React.Fragment>
@@ -143,6 +174,7 @@ class Microscopy extends React.Component {
                                 this.setState({
                                     gramStainShouldIncludeOtherOption: !this.state.gramStainShouldIncludeOtherOption
                                 })
+                                this.saveMicroscopyConfig();
                             }
 
                             }
