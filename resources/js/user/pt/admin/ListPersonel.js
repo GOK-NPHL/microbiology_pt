@@ -30,7 +30,7 @@ class ListPersonel extends React.Component {
             this.setState({
                 data: response
             });
-            console.log(response);
+            // console.log(response);
         })();
 
     }
@@ -68,7 +68,7 @@ class ListPersonel extends React.Component {
         if (this.state.data.length > 0) {
 
             this.state.data.map((element, index) => {
-                console.log(element);
+                // console.log(element);
                 tableElem.push(<tr key={index}>
                     <th scope="row">{index + 1}</th>
                     <td>{element.lab_name}</td>
@@ -88,8 +88,8 @@ class ListPersonel extends React.Component {
                                     }
                                 }
                                 style={{ 'marginRight': '5px' }}
-                                className="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm">
-                                <i className="fas fa-user-edit"></i>
+                                className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm text-white">
+                                <i className="fas fa-user-edit"></i> Edit
                             </a>
                             {/* <a
                                 onClick={() => {
@@ -126,15 +126,15 @@ class ListPersonel extends React.Component {
                 <div className="form-group mb-2">
                     <input type="text"
                         onChange={(event) => {
-                            console.log(this.state.allTableElements);
                             let currElementsTableEl = this.state.allTableElements.filter(elemnt =>
-                                elemnt['props']['children'][1]['props']['children'].toString().toLowerCase().trim().includes(event.target.value.trim().toLowerCase()) ||
-                                elemnt['props']['children'][2]['props']['children'].toLowerCase().trim().includes(event.target.value.trim().toLowerCase()) ||
-                                elemnt['props']['children'][3]['props']['children'].toLowerCase().trim().includes(event.target.value.trim().toLowerCase())
+                                elemnt['props']['children'][1]['props']['children'].toString().toLowerCase().trim().includes(event.target.value.trim().toLowerCase()) 
+                                || elemnt.props.children[2].props.children.map(x=>x.trim()).filter(x=>x.length>0).join(" ").toLowerCase().trim().includes(event.target.value.trim().toLowerCase())
+                                || elemnt['props']['children'][3]['props']['children'].toLowerCase().trim().includes(event.target.value.trim().toLowerCase())
+                                || elemnt['props']['children'][4]['props']['children'].toLowerCase().trim().includes(event.target.value.trim().toLowerCase())
                             );
                             this.updatedSearchItem(currElementsTableEl);
                         }}
-                        className="form-control" placeholder="search personel"></input>
+                        className="form-control" placeholder="Search Personel"></input>
                 </div>
 
                 <table className="table table-striped table-sm  table-hover">

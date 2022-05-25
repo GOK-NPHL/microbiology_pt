@@ -30,7 +30,7 @@ class ListLab extends React.Component {
             this.setState({
                 data: response
             });
-            console.log(response);
+            // console.log(response);
         })();
 
     }
@@ -87,8 +87,8 @@ class ListLab extends React.Component {
                                     }
                                 }
                                 style={{ 'marginRight': '5px' }}
-                                className="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm">
-                                <i className="fas fa-user-edit"></i>
+                                className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm text-white">
+                                <i className="fas fa-edit"></i> Edit
                             </a>
                             {/* <a
                                 onClick={() => {
@@ -125,7 +125,6 @@ class ListLab extends React.Component {
                 <div className="form-group mb-2">
                     <input type="text"
                         onChange={(event) => {
-                            console.log(this.state.allTableElements);
                             let currElementsTableEl = this.state.allTableElements.filter(elemnt =>
                                 elemnt['props']['children'][1]['props']['children'].toString().toLowerCase().trim().includes(event.target.value.trim().toLowerCase()) ||
                                 elemnt['props']['children'][2]['props']['children'].toLowerCase().trim().includes(event.target.value.trim().toLowerCase()) ||
@@ -133,7 +132,7 @@ class ListLab extends React.Component {
                             );
                             this.updatedSearchItem(currElementsTableEl);
                         }}
-                        className="form-control" placeholder="search participant"></input>
+                        className="form-control" placeholder="Search Participant"></input>
                 </div>
 
                 <table className="table table-striped table-sm  table-hover">

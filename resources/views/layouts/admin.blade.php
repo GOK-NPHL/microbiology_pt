@@ -45,7 +45,7 @@ use Illuminate\Support\Facades\Gate;
 
         .nav-link:hover,
         .bg-light>a:hover {
-            color: #1900ff !important;
+            color: #1fabff !important;
             ;
         }
 
@@ -74,7 +74,7 @@ use Illuminate\Support\Facades\Gate;
 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    PT
+                                    Proficiency Testing
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{route('list-admin-user')}}">PT System Managers</a>

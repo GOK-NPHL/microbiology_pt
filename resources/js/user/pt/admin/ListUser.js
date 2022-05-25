@@ -36,7 +36,7 @@ class ListUser extends React.Component {
             this.setState({
                 data: response
             });
-            console.log(response);
+            // console.log(response);
         })();
 
     }
@@ -103,8 +103,8 @@ class ListUser extends React.Component {
                                     }
                                 }
                                 style={{ 'marginRight': '5px' }}
-                                className="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm">
-                                <i className="fas fa-user-edit"></i>
+                                className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm text-white">
+                                <i className="fas fa-user-edit"></i> Edit
                             </a>
                             {/* <a
                                 onClick={() => {
@@ -141,14 +141,13 @@ class ListUser extends React.Component {
                 <div className="form-group mb-2">
                     <input type="text"
                         onChange={(event) => {
-                            console.log(this.state.allTableElements);
                             let currElementsTableEl = this.state.allTableElements.filter(elemnt =>
                                 elemnt['props']['children'][1]['props']['children'].toLowerCase().trim().includes(event.target.value.trim().toLowerCase()) ||
                                 elemnt['props']['children'][2]['props']['children'].toLowerCase().trim().includes(event.target.value.trim().toLowerCase())
                             );
                             this.updatedSearchItem(currElementsTableEl);
                         }}
-                        className="form-control" placeholder="search user"></input>
+                        className="form-control" placeholder="Search User"></input>
                 </div>
 
                 <table className="table table-striped table-sm  table-hover">
